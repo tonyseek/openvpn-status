@@ -1,5 +1,7 @@
 from __future__ import unicode_literals, absolute_import
 
+from six import iteritems
+
 
 class LabelProperty(object):
     """The property with label name."""
@@ -31,7 +33,7 @@ def name_descriptors(cls):
 
 
 def iter_descriptors(cls):
-    for name, value in cls.__dict__.items():
+    for name, value in iteritems(cls.__dict__):
         if name.startswith('__'):
             continue
         if hasattr(value, '__get__') or hasattr(value, '__set__'):

@@ -17,6 +17,7 @@ setup(
     classifiers=[
     ],
     install_requires=[
+        'six',
         'humanize',
     ],
 )
