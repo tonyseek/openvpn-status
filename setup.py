@@ -14,10 +14,16 @@ setup(
     description='Parse OpenVPN status logs in Python',
     long_description=long_description,
     packages=find_packages(),
+    zip_safe=False,
     classifiers=[
     ],
     install_requires=[
         'six',
         'humanize',
     ],
+    extras_require={
+        ':python_version == "2.7"': [
+            'ipaddress',
+        ],
+    },
 )
