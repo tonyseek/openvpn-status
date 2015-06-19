@@ -4,7 +4,7 @@ from collections import OrderedDict
 from ipaddress import ip_address
 
 from .descriptors import LabelProperty, name_descriptors
-from .utils import parse_time, parse_peer
+from .utils import parse_time, parse_peer, parse_filesize
 
 
 @name_descriptors
@@ -23,8 +23,8 @@ class Client(object):
 
     common_name = LabelProperty('Common Name')
     real_address = LabelProperty('Real Address', input_type=parse_peer)
-    bytes_received = LabelProperty('Bytes Received', input_type=int)
-    bytes_sent = LabelProperty('Bytes Sent', input_type=int)
+    bytes_received = LabelProperty('Bytes Received', input_type=parse_filesize)
+    bytes_sent = LabelProperty('Bytes Sent', input_type=parse_filesize)
     connected_since = LabelProperty('Connected Since', input_type=parse_time)
 
 

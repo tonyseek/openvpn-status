@@ -6,7 +6,8 @@ from ipaddress import IPv4Address
 from pytest import mark
 from six import text_type
 
-from openvpn_status.utils import parse_time, parse_peer, PeerAddress
+from openvpn_status.utils import (
+    parse_time, parse_peer, parse_filesize, PeerAddress, FileSize)
 
 
 @mark.parametrize('text,time', [
@@ -28,3 +29,12 @@ def test_parse_time(text, time):
 def test_parse_peer(text, peer):
     assert parse_peer(text) == peer
     assert text_type(text) == text_type(peer)
+
+
+@mark.parametrize('text,humanized', [
+    (10240, '10.2 kB'),
+    ('10240', '10.2 kB'),
+    (FileSize(10240), '10.2 kB'),
+])
+def test_parse_filesize(text, humanized):
+    assert text_type(parse_filesize(text)) == humanized

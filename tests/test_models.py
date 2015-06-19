@@ -3,6 +3,7 @@ from __future__ import unicode_literals, absolute_import
 from itertools import combinations
 from collections import OrderedDict
 from datetime import datetime
+from ipaddress import IPv4Address
 
 from openvpn_status.models import Status, Client, Routing, GlobalStats
 
@@ -51,6 +52,12 @@ def test_client():
     assert not hasattr(client, 'bytes_sent')
     assert not hasattr(client, 'connected_since')
 
+    client.bytes_received = 532895
+    assert client.bytes_received.humanize() == '532.9 kB'
+
+    client.bytes_sent = 34254
+    assert client.bytes_received.humanize(gnu=True) == '520.4K'
+
 
 def test_client_labels():
     assert is_inequality([
@@ -68,6 +75,13 @@ def test_routing():
     assert not hasattr(routing, 'common_name')
     assert not hasattr(routing, 'real_address')
     assert not hasattr(routing, 'last_ref')
+
+    routing.virtual_address = '172.16.1.1'
+    assert routing.virtual_address == IPv4Address('172.16.1.1')
+
+    routing.real_address = '192.168.1.1:8080'
+    assert routing.real_address.host == IPv4Address('192.168.1.1')
+    assert routing.real_address.port == 8080
 
 
 def test_routing_labels():
