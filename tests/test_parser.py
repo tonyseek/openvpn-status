@@ -1,4 +1,9 @@
+from __future__ import unicode_literals, absolute_import
+
+import datetime
+
 from pytest import fixture, raises
+from six import text_type
 
 from openvpn_status.parser import LogParser, ParsingError
 
@@ -19,8 +24,12 @@ def test_parser(openvpn_status):
 
     assert len(status.client_list) == 3
     assert len(status.routing_table) == 3
-    assert status.global_stats
-    assert status.updated_at
+    assert status.global_stats.max_bcast_mcast_queue_len == 0
+    assert status.updated_at == datetime.datetime(2015, 6, 18, 8, 12, 15)
+
+    client = status.client_list['foo@example.com']
+    assert text_type(client.real_address) == '10.10.10.10:49502'
+    assert client.connected_since == datetime.datetime(2015, 6, 18, 4, 23, 3)
 
 
 def test_parser_with_syntax_errors(broken_status):
