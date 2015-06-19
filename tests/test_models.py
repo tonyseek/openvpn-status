@@ -24,6 +24,15 @@ def test_status():
     assert status.updated_at == now
 
 
+def test_status_properties():
+    status = Status()
+    status.client_list.update((i, i) for i in range(3))
+    assert len(status.client_list) == 3
+    assert status.client_list[0] == 0
+    assert status.client_list[1] == 1
+    assert status.client_list[2] == 2
+
+
 def test_status_labels():
     assert is_inequality([
         Status.client_list.label,

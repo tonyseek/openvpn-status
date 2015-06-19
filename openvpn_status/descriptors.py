@@ -16,7 +16,9 @@ class LabelProperty(object):
         if self.__name__ in instance.__dict__:
             return instance.__dict__[self.__name__]
         elif self.default_factory is not None:
-            return self.default_factory()
+            value = self.default_factory()
+            instance.__dict__[self.__name__] = value
+            return value
         else:
             names = (owner.__name__, self.__name__)
             raise AttributeError('%r object has no attribute %r' % names)
