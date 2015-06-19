@@ -6,17 +6,18 @@ from six import iteritems
 class LabelProperty(object):
     """The property with label name."""
 
-    def __init__(self, label, default_factory=None):
+    def __init__(self, label, default=None, input_type=None):
         self.label = label
-        self.default_factory = default_factory
+        self.default = default
+        self.input_type = input_type
 
     def __get__(self, instance, owner):
         if instance is None:
             return self
         if self.__name__ in instance.__dict__:
             return instance.__dict__[self.__name__]
-        elif self.default_factory is not None:
-            value = self.default_factory()
+        elif self.default is not None:
+            value = self.default()
             instance.__dict__[self.__name__] = value
             return value
         else:
@@ -24,6 +25,8 @@ class LabelProperty(object):
             raise AttributeError('%r object has no attribute %r' % names)
 
     def __set__(self, instance, value):
+        if self.input_type is not None:
+            value = self.input_type(value)
         instance.__dict__[self.__name__] = value
 
 
