@@ -33,7 +33,14 @@ def parse_filesize(size):
 
 @unicode_compatible
 class PeerAddress(collections.namedtuple('PeerAddress', 'host port')):
-    """The address of peer entity."""
+    """The address of peer entity.
+
+    :param host: The host address of peer entity.
+    :type host: :class:`~ipaddress.IPv4Address` or
+                :class:`~ipaddress.IPv6Address`
+    :param port: The port of peer entity.
+    :type port: :class:`int`
+    """
 
     def __str__(self):
         return '{0}:{1}'.format(self.host, self.port)
@@ -46,5 +53,10 @@ class FileSize(int):
     def __str__(self):
         return self.humanize()
 
-    def humanize(self, *args, **kwargs):
-        return naturalsize(self, *args, **kwargs)
+    def humanize(self, **kwargs):
+        """Gets the human-friendly representation of file size.
+
+        :param kwargs: All keyword arguments will be passed to
+                       :func:`humanize.filesize.naturalsize`.
+        """
+        return naturalsize(self, **kwargs)
