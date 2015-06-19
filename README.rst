@@ -1,3 +1,5 @@
+|Build Status| |Coverage Status| |PyPI Version| |Wheel Status|
+
 OpenVPN Status
 ==============
 
@@ -75,3 +77,16 @@ Of course, pull requests are always welcome.
 
 .. _document: https://openvpn-status.readthedocs.org
 .. _GitHub: https://github.com/tonyseek/openvpn-status/issues
+
+.. |Build Status| image:: https://img.shields.io/travis/tonyseek/openvpn-status.svg
+   :target: https://travis-ci.org/tonyseek/openvpn-status
+   :alt: Build Status
+.. |Coverage Status| image:: https://img.shields.io/coveralls/tonyseek/openvpn-status.svg
+   :target: https://coveralls.io/r/tonyseek/openvpn-status
+   :alt: Coverage Status
+.. |Wheel Status| image:: https://img.shields.io/pypi/wheel/openvpn-status.svg
+   :target: https://warehouse.python.org/project/openvpn-status
+   :alt: Wheel Status
+.. |PyPI Version| image:: https://img.shields.io/pypi/v/openvpn-status.svg
+   :target: https://pypi.python.org/pypi/openvpn-status
+   :alt: PyPI Version

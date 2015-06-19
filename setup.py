@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 
 with open('README.rst') as readme:
+    next(readme)  # skip badges
     long_description = ''.join(readme).strip()
 
 
