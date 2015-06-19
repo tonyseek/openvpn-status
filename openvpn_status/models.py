@@ -23,8 +23,8 @@ class Client(object):
 
     common_name = LabelProperty('Common Name')
     real_address = LabelProperty('Real Address', input_type=parse_peer)
-    bytes_received = LabelProperty('Bytes Received')
-    bytes_sent = LabelProperty('Bytes Sent')
+    bytes_received = LabelProperty('Bytes Received', input_type=int)
+    bytes_sent = LabelProperty('Bytes Sent', input_type=int)
     connected_since = LabelProperty('Connected Since', input_type=parse_time)
 
 

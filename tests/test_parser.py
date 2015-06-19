@@ -29,7 +29,11 @@ def test_parser(openvpn_status):
 
     client = status.client_list['foo@example.com']
     assert text_type(client.real_address) == '10.10.10.10:49502'
+    assert text_type(client.real_address.host) == '10.10.10.10'
+    assert client.real_address.port == 49502
     assert client.connected_since == datetime.datetime(2015, 6, 18, 4, 23, 3)
+    assert client.bytes_received == 334948
+    assert client.bytes_sent == 1973012
 
 
 def test_parser_with_syntax_errors(broken_status):
