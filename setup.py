@@ -38,7 +38,7 @@ setup(
         'Topic :: Utilities',
     ],
     install_requires=[
-        'six',
+        'six>=1.9.0',
         'humanize',
     ],
     extras_require={
