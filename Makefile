@@ -7,4 +7,4 @@ clean:
 	rm -rf dist
 
 release: clean build
-	twine upload -s dist/*
+	twine upload -s  -i tonyseek@gmail.com dist/*
