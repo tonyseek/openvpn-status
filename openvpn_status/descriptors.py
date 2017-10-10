@@ -10,6 +10,7 @@ class LabelProperty(object):
         self.label = label
         self.default = default
         self.input_type = input_type
+        self.__name__ = None
 
     def __get__(self, instance, owner):
         if instance is None:
@@ -30,9 +31,12 @@ class LabelProperty(object):
         instance.__dict__[self.__name__] = value
 
 
+_missing = object()
+
+
 def name_descriptors(cls):
     for name, value in iter_descriptors(cls):
-        if not hasattr(value, '__name__'):
+        if getattr(value, '__name__', _missing) is None:
             value.__name__ = name
     return cls
 
@@ -41,5 +45,5 @@ def iter_descriptors(cls):
     for name, value in iteritems(cls.__dict__):
         if name.startswith('__'):
             continue
-        if hasattr(value, '__get__') or hasattr(value, '__set__'):
+        if getattr(value, '__get__', None) or getattr(value, '__set__', None):
             yield name, value

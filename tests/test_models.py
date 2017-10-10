@@ -17,10 +17,10 @@ def test_status():
     assert isinstance(status.client_list, OrderedDict)
     assert isinstance(status.routing_table, OrderedDict)
 
-    assert hasattr(status, 'client_list')
-    assert hasattr(status, 'routing_table')
-    assert not hasattr(status, 'global_stats')
-    assert not hasattr(status, 'updated_at')
+    assert getattr(status, 'client_list', None) is not None
+    assert getattr(status, 'routing_table', None) is not None
+    assert getattr(status, 'global_stats', None) is None
+    assert getattr(status, 'updated_at', None) is None
 
     now = datetime.now()
     status.updated_at = now
@@ -46,11 +46,11 @@ def test_status_labels():
 
 def test_client():
     client = Client()
-    assert not hasattr(client, 'common_name')
-    assert not hasattr(client, 'real_address')
-    assert not hasattr(client, 'bytes_received')
-    assert not hasattr(client, 'bytes_sent')
-    assert not hasattr(client, 'connected_since')
+    assert getattr(client, 'common_name', None) is None
+    assert getattr(client, 'real_address', None) is None
+    assert getattr(client, 'bytes_received', None) is None
+    assert getattr(client, 'bytes_sent', None) is None
+    assert getattr(client, 'connected_since', None) is None
 
     client.bytes_received = 532895
     assert client.bytes_received.humanize() == '532.9 kB'
@@ -71,10 +71,10 @@ def test_client_labels():
 
 def test_routing():
     routing = Routing()
-    assert not hasattr(routing, 'virtual_address')
-    assert not hasattr(routing, 'common_name')
-    assert not hasattr(routing, 'real_address')
-    assert not hasattr(routing, 'last_ref')
+    assert getattr(routing, 'virtual_address', None) is None
+    assert getattr(routing, 'common_name', None) is None
+    assert getattr(routing, 'real_address', None) is None
+    assert getattr(routing, 'last_ref', None) is None
 
     routing.virtual_address = '172.16.1.1'
     assert routing.virtual_address == IPv4Address('172.16.1.1')
@@ -95,7 +95,7 @@ def test_routing_labels():
 
 def test_global_stats():
     global_stats = GlobalStats()
-    assert not hasattr(global_stats, 'max_bcast_mcast_queue_len')
+    assert getattr(global_stats, 'max_bcast_mcast_queue_len', None) is None
 
     global_stats.max_bcast_mcast_queue_len = 0
     assert global_stats.max_bcast_mcast_queue_len == 0
