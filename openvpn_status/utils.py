@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import
 
 import datetime
 import collections
@@ -8,7 +8,7 @@ from six import python_2_unicode_compatible as unicode_compatible
 from humanize.filesize import naturalsize
 
 
-DATETIME_FORMAT_OPENVPN = '%a %b %d %H:%M:%S %Y'
+DATETIME_FORMAT_OPENVPN = u'%a %b %d %H:%M:%S %Y'
 
 
 def parse_time(time):

@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import
 
 from .shortcuts import parse_status
 from .parser import ParsingError

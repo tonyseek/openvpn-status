@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import
 
 from six import Iterator, next
 
@@ -13,9 +13,9 @@ class LogParser(Iterator):
     called once in the same instance of parser.
     """
 
-    list_separator = ','
-    line_separator = '\n'
-    terminator = 'END'
+    list_separator = u','
+    line_separator = u'\n'
+    terminator = u'END'
 
     def __init__(self, lines):
         self.lines = iter(lines)

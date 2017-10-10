@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import
 
 from pytest import raises
 
@@ -11,6 +11,6 @@ def test_version():
 
 def test_shortcut():
     with raises(openvpn_status.ParsingError):
-        openvpn_status.parse_status('')
+        openvpn_status.parse_status(u'')
     with raises(openvpn_status.ParsingError):
         openvpn_status.parse_status(b'')

@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import
 
 from itertools import combinations
 from collections import OrderedDict
@@ -53,10 +53,10 @@ def test_client():
     assert getattr(client, 'connected_since', None) is None
 
     client.bytes_received = 532895
-    assert client.bytes_received.humanize() == '532.9 kB'
+    assert client.bytes_received.humanize() == u'532.9 kB'
 
     client.bytes_sent = 34254
-    assert client.bytes_received.humanize(gnu=True) == '520.4K'
+    assert client.bytes_received.humanize(gnu=True) == u'520.4K'
 
 
 def test_client_labels():
@@ -76,11 +76,11 @@ def test_routing():
     assert getattr(routing, 'real_address', None) is None
     assert getattr(routing, 'last_ref', None) is None
 
-    routing.virtual_address = '172.16.1.1'
-    assert routing.virtual_address == IPv4Address('172.16.1.1')
+    routing.virtual_address = u'172.16.1.1'
+    assert routing.virtual_address == IPv4Address(u'172.16.1.1')
 
-    routing.real_address = '192.168.1.1:8080'
-    assert routing.real_address.host == IPv4Address('192.168.1.1')
+    routing.real_address = u'192.168.1.1:8080'
+    assert routing.real_address.host == IPv4Address(u'192.168.1.1')
     assert routing.real_address.port == 8080
 
 

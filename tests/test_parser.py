@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import
 
 import datetime
 
@@ -27,9 +27,9 @@ def test_parser(openvpn_status):
     assert status.global_stats.max_bcast_mcast_queue_len == 0
     assert status.updated_at == datetime.datetime(2015, 6, 18, 8, 12, 15)
 
-    client = status.client_list['foo@example.com']
-    assert text_type(client.real_address) == '10.10.10.10:49502'
-    assert text_type(client.real_address.host) == '10.10.10.10'
+    client = status.client_list[u'foo@example.com']
+    assert text_type(client.real_address) == u'10.10.10.10:49502'
+    assert text_type(client.real_address.host) == u'10.10.10.10'
     assert client.real_address.port == 49502
     assert client.connected_since == datetime.datetime(2015, 6, 18, 4, 23, 3)
     assert client.bytes_received == 334948
