@@ -13,6 +13,7 @@ from netaddr import EUI, mac_unix
 DATETIME_FORMAT_OPENVPN = u'%a %b %d %H:%M:%S %Y'
 RE_VIRTUAL_ADDR_MAC = re.compile(
     u'^{0}:{0}:{0}:{0}:{0}:{0}$'.format(u'[a-f0-9]{2}'), re.I)
+RE_VIRTUAL_ADDR_NETWORK = re.compile(u'/(\\d{1,3})$')
 
 
 def parse_time(time):
@@ -30,8 +31,14 @@ def parse_peer(peer):
 
 
 def parse_vaddr(virtual_addr):
-    if RE_VIRTUAL_ADDR_MAC.search(virtual_addr):
+    match = RE_VIRTUAL_ADDR_MAC.search(virtual_addr)
+    if match:
         return EUI(virtual_addr, dialect=mac_unix)
+
+    match = RE_VIRTUAL_ADDR_NETWORK.search(virtual_addr)
+    if match and 0 < int(match.group(1)) <= 128:
+        return ipaddress.ip_network(virtual_addr)
+
     return ipaddress.ip_address(virtual_addr)
 
 
