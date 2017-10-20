@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
 import datetime
+import ipaddress
 
 from pytest import fixture, raises
 from six import text_type
+from netaddr import EUI
 
 from openvpn_status.parser import LogParser, ParsingError
 
@@ -22,8 +24,9 @@ def test_parser(openvpn_status):
     parser = LogParser.fromstring(openvpn_status.read())
     status = parser.parse()
 
-    assert len(status.client_list) == 4
-    assert len(status.routing_table) == 4
+    assert len(status.client_list) == 5
+    assert len(status.routing_table) == 5
+
     assert status.global_stats.max_bcast_mcast_queue_len == 0
     assert status.updated_at == datetime.datetime(2015, 6, 18, 8, 12, 15)
 
@@ -36,11 +39,19 @@ def test_parser(openvpn_status):
     assert client.bytes_received == 334948
     assert client.bytes_sent == 1973012
 
-    routing = status.routing_table[u'192.168.255.134']
-    assert text_type(routing.virtual_address) == u'192.168.255.134'
-    assert routing.common_name == u'foo@example.com'
-    assert text_type(routing.real_address) == u'10.10.10.10:49502'
-    assert routing.last_ref == datetime.datetime(2015, 6, 18, 8, 12, 9)
+    tun_routing = status.routing_table[u'192.168.255.134']
+    assert isinstance(tun_routing.virtual_address, ipaddress.IPv4Address)
+    assert text_type(tun_routing.virtual_address) == u'192.168.255.134'
+    assert tun_routing.common_name == u'foo@example.com'
+    assert text_type(tun_routing.real_address) == u'10.10.10.10:49502'
+    assert tun_routing.last_ref == datetime.datetime(2015, 6, 18, 8, 12, 9)
+
+    tap_routing = status.routing_table[u'22:1d:63:bf:62:38']
+    assert isinstance(tap_routing.virtual_address, EUI)
+    assert text_type(tap_routing.virtual_address) == u'22:1d:63:bf:62:38'
+    assert tap_routing.common_name == u'tap@example.com'
+    assert text_type(tap_routing.real_address) == u'10.0.0.100:55712'
+    assert tap_routing.last_ref == datetime.datetime(2017, 10, 19, 20, 14, 19)
 
 
 def test_parser_with_syntax_errors(broken_status):
