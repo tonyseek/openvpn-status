@@ -25,7 +25,7 @@ def test_parser(openvpn_status):
     status = parser.parse()
 
     assert len(status.client_list) == 5
-    assert len(status.routing_table) == 5
+    assert len(status.routing_table) == 7
 
     assert status.global_stats.max_bcast_mcast_queue_len == 0
     assert status.updated_at == datetime.datetime(2015, 6, 18, 8, 12, 15)
@@ -52,6 +52,20 @@ def test_parser(openvpn_status):
     assert tap_routing.common_name == u'tap@example.com'
     assert text_type(tap_routing.real_address) == u'10.0.0.100:55712'
     assert tap_routing.last_ref == datetime.datetime(2017, 10, 19, 20, 14, 19)
+
+    ccd_routing = status.routing_table[u'10.200.0.0/16']
+    assert isinstance(ccd_routing.virtual_address, ipaddress.IPv4Network)
+    assert text_type(ccd_routing.virtual_address) == u'10.200.0.0/16'
+    assert ccd_routing.common_name == u'baz@example.com'
+    assert text_type(ccd_routing.real_address) == u'10.10.10.10:63414'
+    assert ccd_routing.last_ref == datetime.datetime(2015, 6, 18, 8, 12, 9)
+
+    ccd_v6_routing = status.routing_table[u'2001:db8::1000/124']
+    assert isinstance(ccd_v6_routing.virtual_address, ipaddress.IPv6Network)
+    assert text_type(ccd_v6_routing.virtual_address) == u'2001:db8::1000/124'
+    assert ccd_v6_routing.common_name == u'baz@example.com'
+    assert text_type(ccd_v6_routing.real_address) == u'10.10.10.10:63414'
+    assert ccd_v6_routing.last_ref == datetime.datetime(2015, 6, 18, 8, 12, 9)
 
 
 def test_parser_with_syntax_errors(broken_status):

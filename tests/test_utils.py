@@ -1,13 +1,15 @@
 from __future__ import absolute_import
 
 from datetime import datetime
-from ipaddress import IPv4Address
+from ipaddress import IPv4Address, IPv6Address, IPv4Network, IPv6Network
 
 from pytest import mark
 from six import text_type
+from netaddr import EUI, mac_unix
 
 from openvpn_status.utils import (
-    parse_time, parse_peer, parse_filesize, PeerAddress, FileSize)
+    parse_time, parse_peer, parse_vaddr, parse_filesize,
+    PeerAddress, FileSize)
 
 
 @mark.parametrize('text,time', [
@@ -29,6 +31,18 @@ def test_parse_time(text, time):
 def test_parse_peer(text, peer):
     assert parse_peer(text) == peer
     assert text_type(text) == text_type(peer)
+
+
+@mark.parametrize('text,virtual_addr', [
+    (u'10.0.0.1', IPv4Address(u'10.0.0.1')),
+    (u'2001:db8:2de::e13', IPv6Address(u'2001:db8:2de::e13')),
+    (u'10.200.0.0/16', IPv4Network(u'10.200.0.0/16')),
+    (u'2001:db8::1000/124', IPv6Network(u'2001:db8::1000/124')),
+    (u'28:d2:44:d4:e6:ea', EUI(u'28:d2:44:d4:e6:ea', dialect=mac_unix)),
+])
+def test_parse_vaddr(text, virtual_addr):
+    assert parse_vaddr(text) == virtual_addr
+    assert text_type(text) == text_type(virtual_addr)
 
 
 @mark.parametrize('text,humanized', [

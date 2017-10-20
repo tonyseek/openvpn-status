@@ -64,13 +64,19 @@ Models
 
    .. attribute:: virtual_address
 
-      :type: :class:`ipaddress.IPv4Address` or :class:`ipaddress.IPv6Address`
-             for TUN mode, and :class:`netaddr.EUI` (MAC address) for TAP mode.
+      :type:
+          - :class:`ipaddress.IPv4Address` or :class:`ipaddress.IPv6Address`
+            for TUN mode
+          - :class:`netaddr.EUI` (MAC address) for TAP mode
+          - :class:`ipaddress.IPv4Network` or :class:`ipaddress.IPv6Network`
+            for *client-config-dir* and *iroute* enabled servers.
 
-      To learn about TUN and TAP, we could read `Bridging vs. routing`_ on the
-      official OpenVPN wiki.
+      Read more about TUN and TAP: `Bridging vs. routing`_.
+
+      Read more about *client-config-dir* (CCD) and *iroute*: `Lans behind OpenVPN`_.
 
       .. _`Bridging vs. routing`: https://community.openvpn.net/openvpn/wiki/BridgingAndRouting
+      .. _`Lans behind OpenVPN`: https://community.openvpn.net/openvpn/wiki/RoutedLans
 
    .. attribute:: common_name
 
