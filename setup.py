@@ -40,6 +40,7 @@ setup(
     install_requires=[
         'six>=1.9.0',
         'humanize',
+        'netaddr',
     ],
     extras_require={
         ':python_version == "2.7"': [

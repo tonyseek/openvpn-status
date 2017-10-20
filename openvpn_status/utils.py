@@ -1,14 +1,18 @@
 from __future__ import absolute_import
 
+import re
 import datetime
 import collections
 import ipaddress
 
 from six import python_2_unicode_compatible as unicode_compatible
 from humanize.filesize import naturalsize
+from netaddr import EUI, mac_unix
 
 
 DATETIME_FORMAT_OPENVPN = u'%a %b %d %H:%M:%S %Y'
+RE_VIRTUAL_ADDR_MAC = re.compile(
+    u'^{0}:{0}:{0}:{0}:{0}:{0}$'.format(u'[a-f0-9]{2}'), re.I)
 
 
 def parse_time(time):
@@ -23,6 +27,12 @@ def parse_peer(peer):
         return peer
     host, port = peer.rsplit(':', 1)
     return PeerAddress(ipaddress.ip_address(host), int(port))
+
+
+def parse_vaddr(virtual_addr):
+    if RE_VIRTUAL_ADDR_MAC.search(virtual_addr):
+        return EUI(virtual_addr, dialect=mac_unix)
+    return ipaddress.ip_address(virtual_addr)
 
 
 def parse_filesize(size):
