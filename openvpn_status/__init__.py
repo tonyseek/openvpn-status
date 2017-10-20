@@ -5,4 +5,4 @@ from .parser import ParsingError
 
 
 __all__ = ['parse_status', 'ParsingError']
-__version__ = '0.1.1'
+__version__ = '0.2.0'
