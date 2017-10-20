@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from six import Iterator, next
+from six import Iterator, next, text_type
 
 from .models import Status, Client, Routing, GlobalStats
 from .descriptors import iter_descriptors
@@ -85,10 +85,10 @@ class LogParser(Iterator):
 
         status.updated_at = self.expect_tuple(Status.updated_at.label)
         status.client_list.update({
-            c.common_name: c
+            text_type(c.real_address): c
             for c in self._parse_fields(Client, Status.routing_table.label)})
         status.routing_table.update({
-            r.common_name: r
+            text_type(r.virtual_address): r
             for r in self._parse_fields(Routing, Status.global_stats.label)})
         status.global_stats = GlobalStats()
         status.global_stats.max_bcast_mcast_queue_len = self.expect_tuple(

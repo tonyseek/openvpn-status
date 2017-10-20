@@ -22,18 +22,25 @@ def test_parser(openvpn_status):
     parser = LogParser.fromstring(openvpn_status.read())
     status = parser.parse()
 
-    assert len(status.client_list) == 3
-    assert len(status.routing_table) == 3
+    assert len(status.client_list) == 4
+    assert len(status.routing_table) == 4
     assert status.global_stats.max_bcast_mcast_queue_len == 0
     assert status.updated_at == datetime.datetime(2015, 6, 18, 8, 12, 15)
 
-    client = status.client_list[u'foo@example.com']
+    client = status.client_list[u'10.10.10.10:49502']
+    assert client.common_name == u'foo@example.com'
     assert text_type(client.real_address) == u'10.10.10.10:49502'
     assert text_type(client.real_address.host) == u'10.10.10.10'
     assert client.real_address.port == 49502
     assert client.connected_since == datetime.datetime(2015, 6, 18, 4, 23, 3)
     assert client.bytes_received == 334948
     assert client.bytes_sent == 1973012
+
+    routing = status.routing_table[u'192.168.255.134']
+    assert text_type(routing.virtual_address) == u'192.168.255.134'
+    assert routing.common_name == u'foo@example.com'
+    assert text_type(routing.real_address) == u'10.10.10.10:49502'
+    assert routing.last_ref == datetime.datetime(2015, 6, 18, 8, 12, 9)
 
 
 def test_parser_with_syntax_errors(broken_status):
