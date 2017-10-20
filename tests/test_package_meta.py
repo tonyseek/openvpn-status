@@ -6,7 +6,7 @@ import openvpn_status
 
 
 def test_version():
-    assert openvpn_status.__version__ == '0.1.1'
+    assert openvpn_status.__version__ == '0.2.0'
 
 
 def test_shortcut():
