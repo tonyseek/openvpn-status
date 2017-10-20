@@ -1,5 +1,5 @@
-0.2.0 (WIP)
------------
+0.2.0 (2017-10-20)
+------------------
 
 - Feature GH-1: Add support to TAP mode of OpenVPN servers by parsing virtual
   addresses as MAC and IP both.
