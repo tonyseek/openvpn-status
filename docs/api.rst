@@ -13,14 +13,14 @@ Models
       (:class:`~collections.OrderedDict`)
 
       The list of connected clients. The dictionary items have form of
-      `(client.common_name, client)`. See also :class:`Client`.
+      `(client.real_address, client)`. See also :class:`Client`.
 
    .. attribute:: routing_table
 
       :type: :class:`~collections.OrderedDict`
 
       The list of routing table. The dictionary items have form of
-      `(routing.common_name, routing)`. See also :class:`Routing`
+      `(routing.virtual_address, routing)`. See also :class:`Routing`.
 
    .. attribute:: global_stats
 
@@ -64,7 +64,13 @@ Models
 
    .. attribute:: virtual_address
 
-      :type: :class:`~ipaddress.IPv4Address` or :class:`~ipaddress.IPv6Address`
+      :type: :class:`ipaddress.IPv4Address` or :class:`ipaddress.IPv6Address`
+             for TUN mode, and :class:`netaddr.EUI` (MAC address) for TAP mode.
+
+      To learn about TUN and TAP, we could read `Bridging vs. routing`_ on the
+      official OpenVPN wiki.
+
+      .. _`Bridging vs. routing`: https://community.openvpn.net/openvpn/wiki/BridgingAndRouting
 
    .. attribute:: common_name
 

@@ -63,7 +63,7 @@ Now we could parse log file with this library:
     print(foo_client.bytes_sent)  # 2.0 MB
 
 
-More detail and API reference are in the document_.
+More details are in the `API reference`_.
 
 
 Contributing
@@ -75,7 +75,7 @@ issues on GitHub_.
 Of course, pull requests are always welcome.
 
 
-.. _document: https://openvpn-status.readthedocs.org
+.. _`API reference`: https://openvpn-status.readthedocs.io/en/stable/api.html
 .. _GitHub: https://github.com/tonyseek/openvpn-status/issues
 
 .. |Build Status| image:: https://img.shields.io/travis/tonyseek/openvpn-status.svg
