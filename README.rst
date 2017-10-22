@@ -6,7 +6,7 @@ OpenVPN Status
 **openvpn-status** is a Python library. It parses OpenVPN status log and turns
 it into Python data structure for you.
 
-It is compatible with CPython `2.7`, `3.3`, `3.4` and PyPy.
+It is compatible with CPython `2.7`, `3.3`, `3.4`, `3.5`, `3.6` and PyPy.
 
 
 Installation
@@ -75,7 +75,7 @@ issues on GitHub_.
 Of course, pull requests are always welcome.
 
 
-.. _`API reference`: https://openvpn-status.readthedocs.io/en/stable/api.html
+.. _`API reference`: https://openvpn-status.readthedocs.io/en/latest/api.html
 .. _GitHub: https://github.com/tonyseek/openvpn-status/issues
 
 .. |Build Status| image:: https://img.shields.io/travis/tonyseek/openvpn-status.svg
