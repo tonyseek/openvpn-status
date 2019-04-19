@@ -7,10 +7,8 @@ python:
   - "3.6"
   - "pypy"
 install:
-  - "pip install -U pip setuptools"
-  - "pip install pytest pytest-cov pytest-pep8 coveralls"
-  - "pip install ."
-script: "cd tests && py.test"
+  - "pip install tox-travis"
+script: "tox"
 after_success: "coveralls"
 branches:
   only:
