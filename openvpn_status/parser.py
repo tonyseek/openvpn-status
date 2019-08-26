@@ -85,7 +85,9 @@ class LogParser(Iterator):
 
         status.updated_at = self.expect_tuple(Status.updated_at.label)
         status.client_list.update({
-            text_type(c.real_address): c
+	    # common_name instead real_address, keyerror issue on parse @tunelko
+            #text_type(c.real_address): c
+            text_type(c.common_name): c
             for c in self._parse_fields(Client, Status.routing_table.label)})
         status.routing_table.update({
             text_type(r.virtual_address): r
