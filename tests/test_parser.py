@@ -104,6 +104,4 @@ def test_parser_with_syntax_errors(broken_status):
     assert error.value.args[0] == 'expected list but got %r' % u'YO TABLE'
 
     error = catch_syntax_error(7)
-    assert error.value.args[0] == 'expected valid format: %s' % (
-        "time data 'Thu Jun 18 04:' does not "
-        "match format '%a %b %d %H:%M:%S %Y'")
+    assert error.value.args[0].startswith('expected valid format: time data ')
