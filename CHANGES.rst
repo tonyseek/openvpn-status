@@ -1,3 +1,8 @@
+0.2.1 (2019-08-27)
+------------------
+
+- Fix GH-11: Fix the parser which throws ``ValueError`` on interrupted stream.
+
 0.2.0 (2017-10-20)
 ------------------
 
