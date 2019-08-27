@@ -21,8 +21,8 @@ def test_label_and_its_name(foo_class):
     foo = foo_class()
     with raises(AttributeError):
         foo.foo
-    assert foo.bar is 0
-    assert foo.baz is 0
+    assert foo.bar == 0
+    assert foo.baz == 0
 
     foo.foo = u'1'
     foo.bar = u'2'
