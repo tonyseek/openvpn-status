@@ -8,7 +8,7 @@ with open('README.rst') as readme:
 
 setup(
     name='openvpn-status',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/tonyseek/openvpn-status',
     author='Jiangge Zhang',
     author_email='tonyseek@gmail.com',
