@@ -27,7 +27,10 @@ class LabelProperty(object):
 
     def __set__(self, instance, value):
         if self.input_type is not None:
-            value = self.input_type(value)
+            try:
+                value = self.input_type(value)
+            except ValueError as e:
+                raise AssignmentValueError(e)
         instance.__dict__[self.__name__] = value
 
 
@@ -47,3 +50,7 @@ def iter_descriptors(cls):
             continue
         if getattr(value, '__get__', None) or getattr(value, '__set__', None):
             yield name, value
+
+
+class AssignmentValueError(ValueError):
+    pass

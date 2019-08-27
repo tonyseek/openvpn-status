@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from six import Iterator, next, text_type
 
 from .models import Status, Client, Routing, GlobalStats
-from .descriptors import iter_descriptors
+from .descriptors import iter_descriptors, AssignmentValueError
 
 
 class LogParser(Iterator):
@@ -80,6 +80,15 @@ class LogParser(Iterator):
         :raises ParsingError: if syntax error found in the log.
         :return: The :class:`.models.Status` with filled data.
         """
+        try:
+            return self._parse()
+        except AssignmentValueError as e:
+            msg = text_type(e) \
+                .encode('ascii', 'backslashreplace') \
+                .decode('ascii')
+            raise ParsingError('expected valid format: %s' % msg)
+
+    def _parse(self):
         status = Status()
         self.expect_line(Status.client_list.label)
 

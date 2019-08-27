@@ -1,0 +1,4 @@
+OpenVPN CLIENT LIST
+Updated,Thu Jun 18 08:12:15 2015
+Common Name,Real Address,Bytes Received,Bytes Sent,Connected Since
+foo@example.com,10.10.10.10:49502,334948,1973012,Thu Jun 18 04:
