@@ -1,4 +1,3 @@
-|Build Status| |Coverage Status| |PyPI Version| |Wheel Status|
 
 OpenVPN Status
 ==============
