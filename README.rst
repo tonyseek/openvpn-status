@@ -58,9 +58,11 @@ Now we could parse log file with this library:
 
     print(status.updated_at)  # datetime.datetime(2015, 6, 18, 8, 12, 15)
 
-    foo_client = status.client_list['foo@example.com']
+    foo_client = status.client_list['169.254.0.1']
+    print(foo_client.common_name)  # foo@example.com
     print(foo_client.bytes_received)  # 334.9 kB
     print(foo_client.bytes_sent)  # 2.0 MB
+    print(int(foo_client.bytes_sent))  # 2097152
 
 
 More details are in the `API reference`_.
