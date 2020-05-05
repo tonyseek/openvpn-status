@@ -25,7 +25,7 @@ def test_parser(openvpn_status):
     status = parser.parse()
 
     assert len(status.client_list) == 5
-    assert len(status.routing_table) == 7
+    assert len(status.routing_table) == 9
 
     assert status.global_stats.max_bcast_mcast_queue_len == 0
     assert status.updated_at == datetime.datetime(2015, 6, 18, 8, 12, 15)
