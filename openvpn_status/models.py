@@ -26,6 +26,9 @@ class Client(object):
         u'Bytes Received', input_type=parse_filesize)
     bytes_sent = LabelProperty(u'Bytes Sent', input_type=parse_filesize)
     connected_since = LabelProperty(u'Connected Since', input_type=parse_time)
+    username = LabelProperty(u'Username')
+    client_id = LabelProperty(u'Client ID', input_type=int)
+    peer_id = LabelProperty(u'Peer ID', input_type=int)
 
 
 @name_descriptors

@@ -51,6 +51,9 @@ def test_client():
     assert getattr(client, 'bytes_received', None) is None
     assert getattr(client, 'bytes_sent', None) is None
     assert getattr(client, 'connected_since', None) is None
+    assert getattr(client, 'username', None) is None
+    assert getattr(client, 'client_id', None) is None
+    assert getattr(client, 'peer_id', None) is None
 
     client.bytes_received = 532895
     assert client.bytes_received.humanize() == u'532.9 kB'

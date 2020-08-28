@@ -38,6 +38,8 @@ def test_parser(openvpn_status):
     assert client.connected_since == datetime.datetime(2015, 6, 18, 4, 23, 3)
     assert client.bytes_received == 334948
     assert client.bytes_sent == 1973012
+    assert client.username == u'issac'
+    assert client.client_id == 0
 
     tun_routing = status.routing_table[u'192.168.255.134']
     assert isinstance(tun_routing.virtual_address, ipaddress.IPv4Address)

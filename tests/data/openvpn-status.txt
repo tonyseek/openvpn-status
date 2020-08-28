@@ -1,11 +1,11 @@
 OpenVPN CLIENT LIST
 Updated,Thu Jun 18 08:12:15 2015
-Common Name,Real Address,Bytes Received,Bytes Sent,Connected Since
-foo@example.com,10.10.10.10:49502,334948,1973012,Thu Jun 18 04:23:03 2015
-foo@example.com,10.10.10.10:49503,334948,1973012,Thu Jun 18 04:23:03 2015
-bar@example.com,10.10.10.10:64169,1817262,28981224,Thu Jun 18 04:08:39 2015
-baz@example.com,10.10.10.10:63414,111183,1202203,Thu Jun 18 07:57:25 2015
-tap@example.com,10.0.0.100:55712,0,0,Thu Oct 19 20:14:19 2017
+Common Name,Real Address,Bytes Received,Bytes Sent,Connected Since,Username,Client ID,Peer ID
+foo@example.com,10.10.10.10:49502,334948,1973012,Thu Jun 18 04:23:03 2015,issac,0,0
+foo@example.com,10.10.10.10:49503,334948,1973012,Thu Jun 18 04:23:03 2015,issac,1,0
+bar@example.com,10.10.10.10:64169,1817262,28981224,Thu Jun 18 04:08:39 2015,issac,2,0
+baz@example.com,10.10.10.10:63414,111183,1202203,Thu Jun 18 07:57:25 2015,issac,3,0
+tap@example.com,10.0.0.100:55712,0,0,Thu Oct 19 20:14:19 2017,issac,4,0
 ROUTING TABLE
 Virtual Address,Common Name,Real Address,Last Ref
 192.168.255.118,baz@example.com,10.10.10.10:63414,Thu Jun 18 08:12:09 2015
