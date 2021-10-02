@@ -15,6 +15,9 @@ Virtual Address,Common Name,Real Address,Last Ref
 192.168.255.135,foo@example.com,10.10.10.10:49503,Thu Jun 18 08:12:09 2015
 192.168.255.126,bar@example.com,10.10.10.10:64169,Thu Jun 18 08:11:55 2015
 22:1d:63:bf:62:38,tap@example.com,10.0.0.100:55712,Thu Oct 19 20:14:19 2017
+192.168.255.126C,bar@example.com,10.10.10.10:64169,Thu Jun 18 08:11:55 2015
+192.168.255.16C,bar@example.com,10.10.10.10:64169,Thu Jun 18 08:11:55 2015
+192.168.255.1C,bar@example.com,10.10.10.10:64169,Thu Jun 18 08:11:55 2015
 GLOBAL STATS
 Max bcast/mcast queue length,0
 END
