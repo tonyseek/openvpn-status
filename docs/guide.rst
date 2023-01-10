@@ -2,4 +2,4 @@ User's Guide
 ============
 
 .. include:: ../README.rst
-   :start-line: 9
+   :start-after: .. summary-end

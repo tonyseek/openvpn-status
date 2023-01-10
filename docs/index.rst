@@ -2,8 +2,8 @@ OpenVPN Status
 ==============
 
 .. include:: ../README.rst
-   :start-line: 3
-   :end-line: 8
+   :start-after: .. summary-begin
+   :end-before: .. summary-end
 
 
 Table Of Contents
