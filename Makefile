@@ -3,14 +3,15 @@
 PYTHON = python3
 TWINE = twine
 
-# pip-tools
-PIP_COMPILE = pip-compile
-PIP_SYNC = pip-sync
-
+# readthedocs.org uses Python 3.7
+DOCPYTHONVERSION=3.7
+DOCPYTHON = python3.7
 DOCDIR = $(realpath docs)
 DOCVENVDIR = $(DOCDIR)/.venv
-DOCPYTHON = $(DOCVENVDIR)/bin/python3
+DOCVENVPYTHON = $(DOCVENVDIR)/bin/python3
 DOCSPHINXBUILD = $(DOCVENVDIR)/bin/sphinx-build
+DOCPIPCOMPILE = $(DOCVENVDIR)/bin/pip-compile
+DOCPIPSYNC = $(DOCVENVDIR)/bin/pip-sync
 
 build:
 	$(PYTHON) setup.py sdist bdist_wheel
@@ -21,11 +22,11 @@ clean:
 release: clean build
 	$(TWINE) upload -s  -i tonyseek@gmail.com dist/*
 
-doc-upgrade:
-	cd $(DOCDIR) && $(PIP_COMPILE) --resolver=backtracking requirements.in
+doc-upgrade: $(DOCPIPCOMPILE)
+	cd $(DOCDIR) && $(DOCPIPCOMPILE) -r --resolver=backtracking requirements.in
 
 doc-html: $(DOCSPHINXBUILD)
-	$(DOCPYTHON) -m pip install -e $(PWD)
+	$(DOCVENVPYTHON) -m pip install -e $(PWD)
 	$(MAKE) -C $(DOCDIR) SPHINXBUILD=$(DOCSPHINXBUILD) html
 
 doc-clean: $(DOCSPHINXBUILD)
@@ -34,6 +35,11 @@ doc-clean: $(DOCSPHINXBUILD)
 doc-reset:
 	rm -rf "$(DOCVENVDIR)"
 
-$(DOCSPHINXBUILD):
-	$(PYTHON) -m venv $(DOCVENVDIR)
-	cd $(DOCDIR) && $(PIP_SYNC) --python-executable $(DOCPYTHON)
+$(DOCSPHINXBUILD): $(DOCPIPSYNC)
+	cd $(DOCDIR) && $(DOCPIPSYNC) --python-executable $(DOCVENVPYTHON)
+
+$(DOCPIPSYNC):
+	$(DOCPYTHON) -m venv $(DOCVENVDIR)
+	$(DOCVENVPYTHON) -m pip install -U pip pip-tools
+
+$(DOCPIPCOMPILE): $(DOCPIPSYNC)
