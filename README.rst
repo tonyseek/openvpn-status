@@ -10,7 +10,7 @@ it into Python data structure for you.
 
 .. summary-end
 
-It is compatible with Python `2.7`, `3.4`, `3.5`, `3.6`, `3.7` and PyPy.
+It is compatible with Python `2.7`, `3.6` to `3.10`, and PyPy.
 
 
 Installation
