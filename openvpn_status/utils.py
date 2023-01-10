@@ -42,7 +42,8 @@ def parse_vaddr(virtual_addr):
 
     match = RE_VIRTUAL_ADDR_CLIENT.search(virtual_addr)
     if match:
-        return ipaddress.ip_address(RE_VIRTUAL_ADDR_CLIENT.sub('', virtual_addr))
+        return ipaddress.ip_address(
+            RE_VIRTUAL_ADDR_CLIENT.sub('', virtual_addr))
 
     return ipaddress.ip_address(virtual_addr)
 
