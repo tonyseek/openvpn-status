@@ -1,3 +1,9 @@
+0.2.2 (2023-01-11)
+------------------
+
+- Fix GH-14: u'192.168.100.110C' does not appear to be an IPv4 or IPv6 address (GH-17, thanks to @mrevilme)
+- Update for Python 3.10+ compatibility
+
 0.2.1 (2019-08-27)
 ------------------
 
